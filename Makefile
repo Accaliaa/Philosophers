@@ -1,4 +1,4 @@
-SRCS			= main.c routine.c actions.c utils.c
+SRCS			= main.c routine.c actions.c utils.c utils2.c
 OBJS			= $(SRCS:.c=.o)
 
 CC				= gcc -g
@@ -11,7 +11,7 @@ NAME			= philo
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				gcc ${CFLAGS} -fsanitize=address -o ${NAME} ${OBJS} ${LIBS}
+				gcc ${CFLAGS} -o ${NAME} ${OBJS} ${LIBS}
 
 clean:
 				$(RM) $(OBJS) $(BONUS_OBJS)
