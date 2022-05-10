@@ -6,7 +6,7 @@
 /*   By: zdasser <zdasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 06:39:20 by zdasser@stu       #+#    #+#             */
-/*   Updated: 2022/05/09 11:55:40 by zdasser          ###   ########.fr       */
+/*   Updated: 2022/05/10 09:56:56 by zdasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data
 	int				n_thread;
 	pthread_t		monitor;
 	int				n_of_time_to_eat;
+	int				thread_state;
 	t_philo			*philo;
 }	t_data;
 

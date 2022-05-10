@@ -6,7 +6,7 @@
 /*   By: zdasser <zdasser@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 06:39:30 by zdasser@stu       #+#    #+#             */
-/*   Updated: 2022/05/09 11:54:09 by zdasser          ###   ########.fr       */
+/*   Updated: 2022/05/10 14:02:49 by zdasser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,22 @@ void	action_philos(t_data *data)
 	while (i < data->number)
 	{
 		data->n_thread = i;
+		data->thread_state = 0;
 		pthread_create(&data->philo[i].thread, NULL, &philo, (void *) data);
+		while (data->thread_state == 0)
+			;
 		i += 2;
-		ft_sleep(20);
 	}
-	ft_sleep(50);
+	ft_sleep(100);
 	i = 1;
 	while (i < data->number)
 	{
 		data->n_thread = i;
+		data->thread_state = 0;
 		pthread_create(&data->philo[i].thread, NULL, &philo, (void *) data);
+		while (data->thread_state == 0)
+			;
 		i += 2;
-		ft_sleep(20);
 	}
 	pthread_create(&data->monitor, NULL, &monitor, (void *) data);
 	join_threads(data);

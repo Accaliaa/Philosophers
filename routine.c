@@ -19,19 +19,17 @@ void	*philo(void *par)
 
 	data = (t_data *)par;
 	i = data->n_thread;
-	pthread_mutex_lock(&data->finish_mutex);
+	data->thread_state = 1;
 	if (data->philo_dead == 0)
 	{
-		pthread_mutex_unlock(&data->finish_mutex);
 		while (data->philo_dead == 0)
 		{
+			philo_eat(data, i);
 			if (data->n_of_time_to_eat == data->philo[i].n_times_ate && \
 			data->n_of_time_to_eat)
 			{
 				data->number_philo_finished++;
-				break ;
 			}
-			philo_eat(data, i);
 			philo_sleep(data, i);
 			philo_think(data, i);
 		}
@@ -52,7 +50,9 @@ int	check_philo_alive(t_data *data)
 		now = ft_time();
 		if ((now - data->philo[i].last_time_ate) > data->philo[i].time_die)
 		{
-			ft_print(data, data->philo[i].n, "is dead");
+			pthread_mutex_lock(&data->write_mutex);
+			now = t_time(data->start_time);
+			printf("%ld  %d  %s\n", now, data->philo[i].n, "is dead");
 			data->philo_dead = 1;
 			data->philo[i].dead = 1;
 			return (0);
